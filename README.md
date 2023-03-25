@@ -57,4 +57,9 @@ A GoogleService-Info.plist file contains all of the information required by the 
 6. Click on the "Download GoogleService-Info.plist" button to download the file.
 
 ### Adding the GoogleService-Info.plist to the Project
-Now that we have downloaded the GoogleService-Info.plist from Firebase, we need to add this file to our Bonocle project. To
+Now that we have downloaded the GoogleService-Info.plist from Firebase, we need to add this file to our Bonocle project. To do so, follow these steps:
+1. Open the Bonocle Video application. 
+2. Drag the GoogleService-Info.plist file and drop it in the Project Navigator. 
+
+Now that you have conducted all the steps above, the application should be ready to run!
+
