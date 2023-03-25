@@ -9,22 +9,31 @@ import SwiftUI
 import WebRTC
 
 class JoinRoomViewModelManager {
-    static let shared = JoinRoomViewModelManager()
-        var shouldInit = false {
-            didSet {
-                if shouldInit {
-                    joinViewModel = JoinRoomViewModel(webRTCClient: webRTCClient)
-                    webRTCClient.speakerOn()
-                }
+    static let shared = JoinRoomViewModelManager(mainPageViewModel: nil)
+    var shouldInit = false {
+        didSet {
+            if shouldInit {
+                joinViewModel = JoinRoomViewModel(webRTCClient: webRTCClient, mainPageViewModel: mainPageViewModel!)
+                webRTCClient.speakerOn()
             }
         }
-        var webRTCClient: WebRTCClient!
-        var joinViewModel: JoinRoomViewModel?
-        
-        private init() {
-            webRTCClient = WebRTCClient(iceServers: Config.default.webRTCIceServers)
-        }
+    }
+    var webRTCClient: WebRTCClient!
+    var joinViewModel: JoinRoomViewModel?
+    var mainPageViewModel: MainPageViewModel?
+    
+    private init(mainPageViewModel: MainPageViewModel?) {
+        self.mainPageViewModel = mainPageViewModel
+        webRTCClient = WebRTCClient(iceServers: Config.default.webRTCIceServers)
+    }
+    
+    static func initialize(mainPageViewModel: MainPageViewModel) {
+        shared.mainPageViewModel = mainPageViewModel
+        shared.shouldInit = true
+    }
 }
+
+
 
 struct RoomView: View {
     
@@ -37,11 +46,13 @@ struct RoomView: View {
     
     let webRTCClient: WebRTCClient
     let joinViewModel: JoinRoomViewModel?
+    var mainViewModel: MainPageViewModel?
     private var timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     
-    init(webRTCClient: WebRTCClient, joinViewModel: JoinRoomViewModel?){
+    init(webRTCClient: WebRTCClient, joinViewModel: JoinRoomViewModel?, mainViewModel: MainPageViewModel?){
         self.webRTCClient = webRTCClient
         self.joinViewModel = joinViewModel
+        self.mainViewModel = mainViewModel
         self.timer = Timer.publish(every: 5, on: .main, in: .common).autoconnect()
     }
     
@@ -60,6 +71,7 @@ struct RoomView: View {
             Spacer()
         }
         HStack {
+            Text("Role: \(mainViewModel?.user?.role ?? "")")
             Button(action: {
                 isSpeakerOn.toggle()
                 if isSpeakerOn {

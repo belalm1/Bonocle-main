@@ -18,6 +18,7 @@ struct LoginView: View {
     @State private var password = ""
     @State private var fname = ""
     @State private var lname = ""
+    @State private var role = "Student"
     @State private var StatusMessage = ""
     @State private var showingAlert = false
     
@@ -51,6 +52,11 @@ struct LoginView: View {
                                 .keyboardType(.emailAddress)
                                 .autocapitalization(.none)
                             SecureField("Password", text: $password)
+                            Picker("Role", selection: $role) {
+                                Text("Teacher").tag("Teacher")
+                                Text("Student").tag("Student")
+                            }
+                            .pickerStyle(DefaultPickerStyle())
                         }
                         .padding()
                         .background(Color.white)
@@ -74,7 +80,7 @@ struct LoginView: View {
                                 Spacer()
                             }.background(Color.green)
                             
-                        }.cornerRadius(10).alert("Invalid User - Try Again ", isPresented: $showingAlert) {
+                        }.cornerRadius(10).alert("This email is already registered", isPresented: $showingAlert) {
                             Button("OK", role: .cancel) { }
                         }
                     }else {
@@ -169,7 +175,7 @@ struct LoginView: View {
     
     private func storeUserInformation() {
         guard let uid = Auth.auth().currentUser?.uid else { return }
-        let userData = ["fname": self.fname, "lname": self.lname, "email": self.email, "uid": uid]
+        let userData = ["fname": self.fname, "lname": self.lname, "email": self.email, "uid": uid, "role": role]
         Firestore.firestore().collection("users")
             .document(uid).setData(userData) { err in
                 if let err = err {

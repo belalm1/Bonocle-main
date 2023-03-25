@@ -120,7 +120,7 @@ final class WebRTCClient: NSObject {
 
         guard
             let frontCamera = (RTCCameraVideoCapturer.captureDevices().first { $0.position == .back }),
-            // choose highest res
+            // choose lowest res
             let format = (RTCCameraVideoCapturer.supportedFormats(for: frontCamera).sorted { (f1, f2) -> Bool in
                 let width1 = CMVideoFormatDescriptionGetDimensions(f1.formatDescription).width
                 let width2 = CMVideoFormatDescriptionGetDimensions(f2.formatDescription).width

@@ -43,7 +43,7 @@ struct HomeView: View {
                     .multilineTextAlignment(.leading)
                 Spacer()
                 Button("Join Room") {
-                    JoinRoomViewModelManager.shared.shouldInit = true
+                    JoinRoomViewModelManager.initialize(mainPageViewModel: vm)
                     isRoomViewActive = true
                 }
                 .font(.system(size: 30, weight: .bold))
@@ -51,7 +51,8 @@ struct HomeView: View {
                 .navigationDestination(isPresented: $isRoomViewActive) {
                     RoomView(
                         webRTCClient: JoinRoomViewModelManager.shared.webRTCClient,
-                        joinViewModel: JoinRoomViewModelManager.shared.joinViewModel
+                        joinViewModel: JoinRoomViewModelManager.shared.joinViewModel,
+                        mainViewModel: JoinRoomViewModelManager.shared.mainPageViewModel
                     )
                 }
                 .navigationBarTitle(Text("\(vm.user?.fname ?? "")'s Bonocle").font(.custom(

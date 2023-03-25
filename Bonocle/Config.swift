@@ -9,7 +9,7 @@
 import Foundation
 
 // Set this to the machine's address which runs the signaling server. Do not use 'localhost' or '127.0.0.1'
-fileprivate let ip = "172.20.102.140"
+fileprivate let ip = "192.168.10.13"
 fileprivate let defaultSignalingServerUrl = URL(string: "ws://" + ip + ":6049")!
 
 // We use Google's public stun servers. For production apps you should deploy your own stun/turn servers.

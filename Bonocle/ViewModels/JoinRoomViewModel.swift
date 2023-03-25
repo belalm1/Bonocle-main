@@ -12,8 +12,8 @@ class JoinRoomViewModel: ObservableObject {
     
     private lazy var signalClient: SignalingClient = self.buildSignalingClient()
     private let webRTCClient: WebRTCClient
+    private let mainPageViewModel: MainPageViewModel
     private let config = Config.default
-    private let isTeacher = false // Later should be replaced with value from FireStore
     private var connectionCount: String
     private var waitingForOffer = true
     
@@ -22,6 +22,7 @@ class JoinRoomViewModel: ObservableObject {
     @Published var hasRemoteSdp = false
     @Published var connectionState: RTCIceConnectionState
     @Published var showVideo = false
+    @Published var role = ""
     var localCandidateCount = 0
     var remoteCandidateCount = 0
     
@@ -30,13 +31,15 @@ class JoinRoomViewModel: ObservableObject {
         return SignalingClient(webSocket: webSocketProvider)
     }
     
-    init(webRTCClient: WebRTCClient) {
+    init(webRTCClient: WebRTCClient, mainPageViewModel: MainPageViewModel) {
         self.connectionCount = "0"
         self.connectionState = RTCIceConnectionState.new
         self.webRTCClient = webRTCClient
+        self.mainPageViewModel = mainPageViewModel
         self.webRTCClient.delegate = self
         self.signalClient.delegate = self
         self.signalClient.connect()
+        self.role = mainPageViewModel.user?.role ?? "None"
         print("Connecting")
     }
 }
@@ -57,7 +60,7 @@ extension JoinRoomViewModel: SignalClientDelegate {
         self.webRTCClient.set(remoteSdp: sdp) { (error) in
             self.hasRemoteSdp = true
         }
-        if !self.isTeacher && self.waitingForOffer{
+        if self.role == "Student" && self.waitingForOffer{
             // The current user is not the teacher and is waiting for an offer
             self.webRTCClient.answer { (localSdp) in
                 self.hasLocalSdp = true
@@ -76,8 +79,8 @@ extension JoinRoomViewModel: SignalClientDelegate {
     
     func signalClient(_ signalClient: SignalingClient, didReceiveConnectionCount connectionCount: String) {
         self.connectionCount = connectionCount
-        if Int(connectionCount)! >= 2 {
-            if self.isTeacher {
+        if Int(connectionCount)! == 2 {
+            if self.role == "Teacher" {
                 // The current user is the teacher, so send an offer
                 self.webRTCClient.offer { (sdp) in
                     self.hasLocalSdp = true

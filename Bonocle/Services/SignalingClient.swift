@@ -29,6 +29,7 @@ final class SignalingClient {
     }
     
     func connect() {
+        print("Connecting...")
         self.webSocket.delegate = self
         self.webSocket.connect()
     }

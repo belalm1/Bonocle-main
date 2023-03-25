@@ -15,6 +15,7 @@ class MainPageViewModel: ObservableObject {
     @Published var user: User?
     
     init() {
+        print("MAINPAGEVIEWMODEL-----------")
         DispatchQueue.main.async {
             // Checks if the current user is logged out (aka, has a uid)
             self.isUserCurrentlyLoggedOut = FirebaseManager.shared.auth.currentUser?.uid == nil
@@ -28,6 +29,7 @@ class MainPageViewModel: ObservableObject {
             self.errorMessage = "Could not find firebase uid"
             return
         }
+        
         
         // Get the user and their values, and put them in the self.user variable
         FirebaseManager.shared.firestore.collection("users").document(uid).getDocument {
@@ -47,9 +49,12 @@ class MainPageViewModel: ObservableObject {
             let fname = data["fname"] as? String ?? ""
             let lname = data["lname"] as? String ?? ""
             let email = data["email"] as? String ?? ""
+            let role = data["role"] as? String ?? ""
+
+            print(role)
             
             // Set the self.user to a new User instance with all the values from the data
-            self.user = User(id: uid, fname: fname, lname: lname, email: email)
+            self.user = User(id: uid, fname: fname, lname: lname, email: email, role: role)
             
         }
     }
