@@ -23,7 +23,7 @@ struct LoginView: View {
     @State private var showingAlert = false
     
     var body: some View {
-        NavigationView {
+        NavigationStack {
             ScrollView {
                 HStack {
                     Text("Bonocle V2")

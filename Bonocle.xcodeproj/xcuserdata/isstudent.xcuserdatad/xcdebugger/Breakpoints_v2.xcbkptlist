@@ -7,94 +7,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "4344908B-9883-47E1-BCF8-C606558C6A03"
+            uuid = "475F917F-6FB0-4D21-B29B-9C1484C41952"
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bonocle/Views/RoomView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "103"
-            endingLineNumber = "103"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "E4DE04D9-41F6-4C23-B7DA-9A50CE2C4FBA"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Bonocle/Views/RoomView.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
-            landmarkName = "body"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "D03CD282-4939-4183-87E7-0966103C9A6E"
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Bonocle/ViewModels/JoinRoomViewModel.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "init(webRTCClient:mainPageViewModel:)"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "init(parentView:)"
             landmarkType = "7">
             <Locations>
                <Location
-                  uuid = "D03CD282-4939-4183-87E7-0966103C9A6E - d3440d8e29ee7669"
+                  uuid = "475F917F-6FB0-4D21-B29B-9C1484C41952 - 161116061e9d7232"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Bonocle.JoinRoomViewModel.__allocating_init(webRTCClient: Bonocle.WebRTCClient) -&gt; Bonocle.JoinRoomViewModel"
+                  symbolName = "Bonocle.RoomView.init() -&gt; Bonocle.RoomView"
                   moduleName = "Bonocle"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/isstudent/Downloads/Bonocle-main/Bonocle/ViewModels/JoinRoomViewModel.swift"
+                  urlString = "file:///Users/isstudent/Downloads/Bonocle-main/Bonocle/Views/RoomView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "0"
-                  endingLineNumber = "0"
-                  offsetFromSymbolStart = "24">
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "1304">
                </Location>
                <Location
-                  uuid = "D03CD282-4939-4183-87E7-0966103C9A6E - 816a194e460f783f"
+                  uuid = "475F917F-6FB0-4D21-B29B-9C1484C41952 - e888f0619f392aab"
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "Bonocle.JoinRoomViewModel.init(webRTCClient: Bonocle.WebRTCClient) -&gt; Bonocle.JoinRoomViewModel"
+                  symbolName = "Bonocle.RoomView.init(joinViewModel: Bonocle.JoinRoomViewModel) -&gt; Bonocle.RoomView"
                   moduleName = "Bonocle"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/isstudent/Downloads/Bonocle-main/Bonocle/ViewModels/JoinRoomViewModel.swift"
+                  urlString = "file:///Users/isstudent/Downloads/Bonocle-main/Bonocle/Views/RoomView.swift"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "16"
-                  endingLineNumber = "16"
-                  offsetFromSymbolStart = "160">
-               </Location>
-               <Location
-                  uuid = "D03CD282-4939-4183-87E7-0966103C9A6E - 816a194e460f7daa"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Bonocle.JoinRoomViewModel.init(webRTCClient: Bonocle.WebRTCClient) -&gt; Bonocle.JoinRoomViewModel"
-                  moduleName = "Bonocle"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/isstudent/Downloads/Bonocle-main/Bonocle/ViewModels/JoinRoomViewModel.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "35"
-                  endingLineNumber = "35"
-                  offsetFromSymbolStart = "804">
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "1348">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -102,8 +55,8 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "3C7B5E02-BB2F-411E-A0D4-7DB689407545"
-            shouldBeEnabled = "No"
+            uuid = "B00F13BF-5EF5-49C7-B71B-35B86E96A25F"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bonocle/Services/SignalingClient.swift"
@@ -113,6 +66,54 @@
             endingLineNumber = "31"
             landmarkName = "connect()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "7D0BA89A-B7BF-47B1-937A-E734DA6192B8"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Bonocle/Services/WebSocketProvider/NativeWebSocket.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "24"
+            endingLineNumber = "24"
+            landmarkName = "connect()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "7D0BA89A-B7BF-47B1-937A-E734DA6192B8 - 1a9247a028f35812"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Bonocle.NativeWebSocket.connect() -&gt; ()"
+                  moduleName = "Bonocle"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/isstudent/Downloads/Bonocle-main/Bonocle/Services/WebSocketProvider/NativeWebSocket.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "84">
+               </Location>
+               <Location
+                  uuid = "7D0BA89A-B7BF-47B1-937A-E734DA6192B8 - 1a9247a028f35812"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Bonocle.NativeWebSocket.connect() -&gt; ()"
+                  moduleName = "Bonocle"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/isstudent/Downloads/Bonocle-main/Bonocle/Services/WebSocketProvider/NativeWebSocket.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "96">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -34,6 +34,11 @@ final class SignalingClient {
         self.webSocket.connect()
     }
     
+    func disconnect() {
+        print("Disconnecting...")
+        self.webSocket.disconnect()
+    }
+    
     func send(sdp rtcSdp: RTCSessionDescription) {
         let message = Message.sdp(SessionDescription(from: rtcSdp))
         do {
@@ -66,11 +71,13 @@ extension SignalingClient: WebSocketProviderDelegate {
     
     func webSocketDidDisconnect(_ webSocket: WebSocketProvider) {
         self.delegate?.signalClientDidDisconnect(self)
-        
-        // try to reconnect every two seconds
-        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
-            debugPrint("Trying to reconnect to signaling server...")
-            self.webSocket.connect()
+        print("Should Init?", JoinRoomViewModelManager.shared.shouldInit)
+        if JoinRoomViewModelManager.shared.shouldInit {
+            // try to reconnect every two seconds
+            DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+                debugPrint("Trying to reconnect to signaling server...")
+                self.webSocket.connect()
+            }
         }
     }
     

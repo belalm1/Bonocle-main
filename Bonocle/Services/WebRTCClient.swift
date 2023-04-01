@@ -28,7 +28,7 @@ final class WebRTCClient: NSObject {
     
     weak var delegate: WebRTCClientDelegate?
     let peerConnection: RTCPeerConnection
-    private let rtcAudioSession =  RTCAudioSession.sharedInstance()
+    let rtcAudioSession =  RTCAudioSession.sharedInstance()
     private let audioQueue = DispatchQueue(label: "audio")
     private let mediaConstrains = [kRTCMediaConstraintsOfferToReceiveAudio: kRTCMediaConstraintsValueTrue,
                                    kRTCMediaConstraintsOfferToReceiveVideo: kRTCMediaConstraintsValueTrue]    
@@ -67,7 +67,6 @@ final class WebRTCClient: NSObject {
         self.createMediaSenders()
         self.configureAudioSession()
         self.peerConnection.delegate = self
-        print("WebRTC INIT")
     }
     
     // MARK: Signaling
@@ -119,14 +118,18 @@ final class WebRTCClient: NSObject {
         }
 
         guard
-            let frontCamera = (RTCCameraVideoCapturer.captureDevices().first { $0.position == .back }),
-            // choose lowest res
+            let frontCamera = (RTCCameraVideoCapturer.captureDevices().first { $0.position == .front }),
+            // Choose resolution
             let format = (RTCCameraVideoCapturer.supportedFormats(for: frontCamera).sorted { (f1, f2) -> Bool in
-                let width1 = CMVideoFormatDescriptionGetDimensions(f1.formatDescription).width
-                let width2 = CMVideoFormatDescriptionGetDimensions(f2.formatDescription).width
-                print(width1, width2)
-                return width1 < width2
-            }).first,
+                let f1Size = CMVideoFormatDescriptionGetDimensions(f1.formatDescription)
+                let f2Size = CMVideoFormatDescriptionGetDimensions(f2.formatDescription)
+
+                // Get the highest resolution up to 720p
+                if f1Size.width > 1280 || f1Size.height > 720 {
+                    return false
+                }
+                return f1Size.width * f1Size.height < f2Size.width * f2Size.height
+            }).last,
         
             // choose highest fps
             let fps = (format.videoSupportedFrameRateRanges.sorted { return $0.maxFrameRate < $1.maxFrameRate }.last) else {

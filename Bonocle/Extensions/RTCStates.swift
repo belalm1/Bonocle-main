@@ -25,6 +25,12 @@ extension RTCIceConnectionState: CustomStringConvertible {
     }
 }
 
+extension RTCIceConnectionState: Equatable {
+    public static func ==(lhs: RTCIceConnectionState, rhs: RTCIceConnectionState) -> Bool {
+        return lhs.description == rhs.description
+    }
+}
+
 extension RTCSignalingState: CustomStringConvertible {
     public var description: String {
         switch self {

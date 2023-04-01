@@ -8,9 +8,41 @@
 import Foundation
 import WebRTC
 
+class JoinRoomViewModelManager {
+    static let shared = JoinRoomViewModelManager(mainPageViewModel: nil)
+    var shouldInit = false {
+        didSet {
+            if shouldInit {
+                webRTCClient = WebRTCClient(iceServers: Config.default.webRTCIceServers)
+                joinViewModel = JoinRoomViewModel(webRTCClient: webRTCClient, mainPageViewModel: mainPageViewModel!)
+            }
+        }
+    }
+    var webRTCClient: WebRTCClient!
+    var joinViewModel: JoinRoomViewModel?
+    var mainPageViewModel: MainPageViewModel?
+    
+    private init(mainPageViewModel: MainPageViewModel?) {
+        self.mainPageViewModel = mainPageViewModel
+    }
+    
+    static func initialize(mainPageViewModel: MainPageViewModel) {
+        shared.mainPageViewModel = mainPageViewModel
+        shared.shouldInit = true
+    }
+
+    func destroyJoinRoomModel() {
+        self.joinViewModel = nil
+        //self.webRTCClient.peerConnection.close()
+        self.webRTCClient = nil
+        self.shouldInit = false
+        print("Should Init = false")
+    }
+}
+
 class JoinRoomViewModel: ObservableObject {
     
-    private lazy var signalClient: SignalingClient = self.buildSignalingClient()
+    lazy var signalClient: SignalingClient = self.buildSignalingClient()
     private let webRTCClient: WebRTCClient
     private let mainPageViewModel: MainPageViewModel
     private let config = Config.default
@@ -23,8 +55,11 @@ class JoinRoomViewModel: ObservableObject {
     @Published var connectionState: RTCIceConnectionState
     @Published var showVideo = false
     @Published var role = ""
+    @Published var displayName : String = ""
+
     var localCandidateCount = 0
     var remoteCandidateCount = 0
+    @Published var messages: [ChatMessage] = []
     
     private func buildSignalingClient() -> SignalingClient {
         let webSocketProvider = NativeWebSocket(url: self.config.signalingServerUrl)
@@ -40,7 +75,17 @@ class JoinRoomViewModel: ObservableObject {
         self.signalClient.delegate = self
         self.signalClient.connect()
         self.role = mainPageViewModel.user?.role ?? "None"
+
+        // displayName is the first name and the first letter of the last name
+        self.displayName = (self.role) + " " + (mainPageViewModel.user?.fname ?? "")
         print("Connecting")
+    }
+
+    // Function to end the call
+    func endCall() {
+        self.webRTCClient.peerConnection.close()
+        //self.signalClient.disconnect()
+        print("Ended Call")
     }
 }
 
@@ -105,12 +150,30 @@ extension JoinRoomViewModel: WebRTCClientDelegate {
     func webRTCClient(_ client: WebRTCClient, didChangeConnectionState state: RTCIceConnectionState) {
         self.connectionState = state
     }
-    
+    // Function to receive data from the other user
     func webRTCClient(_ client: WebRTCClient, didReceiveData data: Data) {
         DispatchQueue.main.async {
-            let message = String(data: data, encoding: .utf8) ?? "(Binary: \(data.count) bytes)"
+            // Receive data
+            let messageDict = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: String]
+            let message = messageDict?["message"] ?? ""
+            let displayName = messageDict?["displayName"] ?? ""
+
+            //let message = String(data: data, encoding: .utf8) ?? "(Binary: \(data.count) bytes)"
+
+            // Add message to array with the displayName and the timestamp formatted in HH:mm
+            self.messages.append(ChatMessage(timestamp: Date(), isMe: false, message: message, displayName: displayName))
             print(message)
         }
+    }
+
+    // Function to send data to the other user
+    func sendMessage(message: String, displayName: String) {
+        let messageDict = ["message": message, "displayName": displayName]
+        // Convert to JSON
+        let jsonData = try? JSONSerialization.data(withJSONObject: messageDict)
+        // Send data
+        self.webRTCClient.sendData(jsonData!)
+        self.messages.append(ChatMessage(timestamp: Date(), isMe: true, message: message, displayName: displayName))
     }
 }
 

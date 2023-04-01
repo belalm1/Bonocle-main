@@ -20,6 +20,7 @@
 		B63A764529A2C28300D67BBA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63A764429A2C28300D67BBA /* LoginView.swift */; };
 		B63A764729A2C35D00D67BBA /* MainPageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63A764629A2C35D00D67BBA /* MainPageViewModel.swift */; };
 		B63A764B29A2D07200D67BBA /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B63A764A29A2D07200D67BBA /* ProfileView.swift */; };
+		B667312F29D5CC7F00442CF1 /* HexColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B667312E29D5CC7F00442CF1 /* HexColor.swift */; };
 		B66A750029BF7854003E20D6 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = B66A74FF29BF7854003E20D6 /* FirebaseAuth */; };
 		B66A750229BF7854003E20D6 /* FirebaseAuthCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = B66A750129BF7854003E20D6 /* FirebaseAuthCombine-Community */; };
 		B66A750429BF7854003E20D6 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = B66A750329BF7854003E20D6 /* FirebaseDatabase */; };
@@ -30,9 +31,9 @@
 		B66A750E29BF7854003E20D6 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = B66A750D29BF7854003E20D6 /* FirebaseStorage */; };
 		B66A751029BF7854003E20D6 /* FirebaseStorageCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = B66A750F29BF7854003E20D6 /* FirebaseStorageCombine-Community */; };
 		B66A751329BF7BBB003E20D6 /* WebRTC in Frameworks */ = {isa = PBXBuildFile; productRef = B66A751229BF7BBB003E20D6 /* WebRTC */; };
+		B6753B0229D70873006ADC44 /* ChatView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6753B0129D70873006ADC44 /* ChatView.swift */; };
 		B68D94CC29C3579A00423E09 /* StatisticsLogger.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68D94CB29C3579A00423E09 /* StatisticsLogger.swift */; };
 		B68D94D229CAFB3F00423E09 /* JoinCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68D94D129CAFB3F00423E09 /* JoinCode.swift */; };
-		B68D94D529CB561E00423E09 /* bonocleImage.png in Resources */ = {isa = PBXBuildFile; fileRef = B68D94D429CB561E00423E09 /* bonocleImage.png */; };
 		B697EACF29BB63EF006816FC /* RoomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B697EACE29BB63EF006816FC /* RoomView.swift */; };
 		B697EAD129BB6B1B006816FC /* JoinRoomViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B697EAD029BB6B1B006816FC /* JoinRoomViewModel.swift */; };
 		B697EAEE29BB6C41006816FC /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = B697EAD729BB6C41006816FC /* Message.swift */; };
@@ -63,9 +64,10 @@
 		B63A764429A2C28300D67BBA /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		B63A764629A2C35D00D67BBA /* MainPageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainPageViewModel.swift; sourceTree = "<group>"; };
 		B63A764A29A2D07200D67BBA /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		B667312E29D5CC7F00442CF1 /* HexColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HexColor.swift; sourceTree = "<group>"; };
+		B6753B0129D70873006ADC44 /* ChatView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatView.swift; sourceTree = "<group>"; };
 		B68D94CB29C3579A00423E09 /* StatisticsLogger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsLogger.swift; sourceTree = "<group>"; };
 		B68D94D129CAFB3F00423E09 /* JoinCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinCode.swift; sourceTree = "<group>"; };
-		B68D94D429CB561E00423E09 /* bonocleImage.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = bonocleImage.png; sourceTree = "<group>"; };
 		B697EACE29BB63EF006816FC /* RoomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomView.swift; sourceTree = "<group>"; };
 		B697EAD029BB6B1B006816FC /* JoinRoomViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinRoomViewModel.swift; sourceTree = "<group>"; };
 		B697EAD729BB6C41006816FC /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -121,7 +123,6 @@
 		B63A761429A2BD4000D67BBA /* Bonocle */ = {
 			isa = PBXGroup;
 			children = (
-				B68D94D329CB553D00423E09 /* Resources */,
 				B697EADE29BB6C41006816FC /* Extensions */,
 				B697EAD629BB6C41006816FC /* Services */,
 				B63A764F29A2D63800D67BBA /* Views */,
@@ -182,16 +183,9 @@
 				B63A761729A2BD4000D67BBA /* HomeView.swift */,
 				B697EACE29BB63EF006816FC /* RoomView.swift */,
 				B697EB0F29BCAE33006816FC /* WebRTCVideoView.swift */,
+				B6753B0129D70873006ADC44 /* ChatView.swift */,
 			);
 			path = Views;
-			sourceTree = "<group>";
-		};
-		B68D94D329CB553D00423E09 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-				B68D94D429CB561E00423E09 /* bonocleImage.png */,
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		B697EAD629BB6C41006816FC /* Services */ = {
@@ -222,6 +216,7 @@
 				B697EAE029BB6C41006816FC /* SessionDescription.swift */,
 				B697EAE129BB6C41006816FC /* IceCandidate.swift */,
 				B68D94D129CAFB3F00423E09 /* JoinCode.swift */,
+				B667312E29D5CC7F00442CF1 /* HexColor.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -300,7 +295,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B68D94D529CB561E00423E09 /* bonocleImage.png in Resources */,
 				B63A761D29A2BD4100D67BBA /* Preview Assets.xcassets in Resources */,
 				B63A761A29A2BD4100D67BBA /* Assets.xcassets in Resources */,
 				B697EB0629BC002F006816FC /* GoogleService-Info.plist in Resources */,
@@ -317,6 +311,7 @@
 				B63A763929A2BEF200D67BBA /* FirebaseManager.swift in Sources */,
 				B63A763F29A2C0D500D67BBA /* UsersViewModel.swift in Sources */,
 				B63A764729A2C35D00D67BBA /* MainPageViewModel.swift in Sources */,
+				B6753B0229D70873006ADC44 /* ChatView.swift in Sources */,
 				B63A763D29A2BF3A00D67BBA /* UserViewModel.swift in Sources */,
 				B697EAEF29BB6C41006816FC /* WebSocketProvider.swift in Sources */,
 				B697EAF629BB6C41006816FC /* IceCandidate.swift in Sources */,
@@ -338,6 +333,7 @@
 				B697EAEE29BB6C41006816FC /* Message.swift in Sources */,
 				B68D94D229CAFB3F00423E09 /* JoinCode.swift in Sources */,
 				B63A764B29A2D07200D67BBA /* ProfileView.swift in Sources */,
+				B667312F29D5CC7F00442CF1 /* HexColor.swift in Sources */,
 				B63A763729A2BEC900D67BBA /* User.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

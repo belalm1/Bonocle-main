@@ -22,10 +22,12 @@ class NativeWebSocket: NSObject, WebSocketProvider {
     }
 
     func connect() {
-        let socket = urlSession.webSocketTask(with: url)
-        socket.resume()
-        self.socket = socket
-        self.readMessage()
+        if JoinRoomViewModelManager.shared.shouldInit {
+            let socket = urlSession.webSocketTask(with: url)
+            socket.resume()
+            self.socket = socket
+            self.readMessage()
+        }
     }
 
     func send(data: Data) {
@@ -51,7 +53,7 @@ class NativeWebSocket: NSObject, WebSocketProvider {
         }
     }
     
-    private func disconnect() {
+    func disconnect() {
         self.socket?.cancel()
         self.socket = nil
         self.delegate?.webSocketDidDisconnect(self)
