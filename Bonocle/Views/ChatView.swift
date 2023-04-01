@@ -35,97 +35,97 @@ struct ChatView: View {
     }
     
     var body: some View {
-//        if self.viewModel.connectionState != .connected {
-//            // Dismiss the current view
-//            self.parentView.showChatView = false
-//            let _ = presentationMode.wrappedValue.dismiss()
-//        } else {
-            // VStack to display the chat and text entry field
-        VStack {
-            // List to display the messages
-            List {
-                // Loop through the messages
-                ForEach(viewModel.messages , id: \.timestamp) { message in
-                    // Display the message
-                    HStack {
-                        // If the message is from the user, display it on the right
-                        if message.isMe {
-                            Spacer()
-                            VStack {
-                                // Caption with the displayName and time, aligned to the right
-                                Text(self.dateFormatter.string(from: message.timestamp) + ", " + message.displayName)
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
-                                    .frame(maxWidth: .infinity, alignment: .trailing)
+        NavigationView {
+            VStack {
+                // List to display the messages
+                List {
+                    // Loop through the messages
+                    ForEach(viewModel.messages , id: \.timestamp) { message in
+                        // Display the message
+                        HStack {
+                            // If the message is from the user, display it on the right
+                            if message.isMe {
+                                Spacer()
+                                VStack {
+                                    // Caption with the displayName and time, aligned to the right
+                                    Text(self.dateFormatter.string(from: message.timestamp) + ", " + message.displayName)
+                                        .font(.caption)
+                                        .foregroundColor(.gray)
+                                        .frame(maxWidth: .infinity, alignment: .trailing)
 
-                                // Add the message
-                                Text(message.message)
-                                    // Add horizontal padding
-                                    .padding(.horizontal, 10)
-                                    // Add vertical padding
-                                    .padding(.vertical, 5)
-                                    .background(Color.blue)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(10)
-                                    .frame(maxWidth: .infinity, alignment: .trailing)
+                                    // Add the message
+                                    Text(message.message)
+                                        // Add horizontal padding
+                                        .padding(.horizontal, 10)
+                                        // Add vertical padding
+                                        .padding(.vertical, 5)
+                                        .background(Color.blue)
+                                        .foregroundColor(.white)
+                                        .cornerRadius(10)
+                                        .frame(maxWidth: .infinity, alignment: .trailing)
+                                }
                             }
-                        }
-                        // If the message is from the other user, display it on the left
-                        else {
-                            VStack {
-                                // Caption with the displayName and timestamp aligned to the left
-                                Text(self.dateFormatter.string(from: message.timestamp) + ", " + message.displayName)
-                                    .font(.caption)
-                                    .foregroundColor(.gray)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
+                            // If the message is from the other user, display it on the left
+                            else {
+                                VStack {
+                                    // Caption with the displayName and timestamp aligned to the left
+                                    Text(self.dateFormatter.string(from: message.timestamp) + ", " + message.displayName)
+                                        .font(.caption)
+                                        .foregroundColor(.gray)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
 
-                                // Add the message
-                                Text(message.message)
-                                    // Add horizontal padding
-                                    .padding(.horizontal, 10)
-                                    // Add vertical padding
-                                    .padding(.vertical, 7)
-                                    .background(Color.gray)
-                                    .foregroundColor(.white)
-                                    .cornerRadius(10)
-                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    // Add the message
+                                    Text(message.message)
+                                        // Add horizontal padding
+                                        .padding(.horizontal, 10)
+                                        // Add vertical padding
+                                        .padding(.vertical, 7)
+                                        .background(Color.gray)
+                                        .foregroundColor(.white)
+                                        .cornerRadius(10)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                }
+                                Spacer()
                             }
-                            Spacer()
-                        }
-                    }.listRowBackground(Color.clear)
-                }
-            }
-            // Text field and "send" button
-            HStack {
-                // Text field to enter the message
-                TextField("Enter message", text: $messageText)
-                    .textFieldStyle(RoundedBorderTextFieldStyle())
-                // "Send" button to add the message to the list
-                Button("Send") {
-                    // Check if the message is empty
-                    if messageText == "" {
-                        // If it is, return
-                        return
+                        }.listRowBackground(Color.clear)
                     }
-                    
-                    // Send the message to the server
-                    viewModel.sendMessage(message: messageText, displayName: viewModel.displayName)
-                    
-                    // Clear the text field
-                    messageText = ""
+                }
+                // Text field and "send" button
+                HStack {
+                    // Text field to enter the message
+                    TextField("Enter message", text: $messageText)
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                    // "Send" button to add the message to the list
+                    Button("Send") {
+                        // Check if the message is empty
+                        if messageText == "" {
+                            // If it is, return
+                            return
+                        }
+                        
+                        // Send the message to the server
+                        viewModel.sendMessage(message: messageText, displayName: viewModel.displayName)
+                        
+                        // Clear the text field
+                        messageText = ""
+                    }
+                }
+                .padding()
+            }
+            // NavigationView to display the chat
+            //.navigationTitle("Chat")
+            .navigationBarItems(leading: Button("Back") {
+                // Leave the chat
+                self.presentationMode.wrappedValue.dismiss()
+            })
+            // .navigationBarBackButtonHidden(false)
+            .onChange(of: self.viewModel.connectionState) { newValue in
+                print("Ice connection state changed to \(newValue)")
+                if newValue != .connected {
+                    self.parentView.showChatView = false
+                    presentationMode.wrappedValue.dismiss()
                 }
             }
-            .padding()
         }
-        // NavigationView to display the chat
-        .navigationTitle("Chat")
-        .onChange(of: self.viewModel.connectionState) { newValue in
-            print("Ice connection state changed to \(newValue)")
-            if newValue != .connected {
-                self.parentView.showChatView = false
-                presentationMode.wrappedValue.dismiss()
-            }
-        }
-        //}
     }
 }
