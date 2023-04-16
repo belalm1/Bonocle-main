@@ -123,9 +123,9 @@ final class WebRTCClient: NSObject {
             let format = (RTCCameraVideoCapturer.supportedFormats(for: frontCamera).sorted { (f1, f2) -> Bool in
                 let f1Size = CMVideoFormatDescriptionGetDimensions(f1.formatDescription)
                 let f2Size = CMVideoFormatDescriptionGetDimensions(f2.formatDescription)
-
+                print(f1Size, f2Size)
                 // Get the highest resolution up to 720p
-                if f1Size.width > 1280 || f1Size.height > 720 {
+                if f1Size.width > 960 || f1Size.height > 540 {
                     return false
                 }
                 return f1Size.width * f1Size.height < f2Size.width * f2Size.height

@@ -113,6 +113,21 @@
                   endingLineNumber = "25"
                   offsetFromSymbolStart = "96">
                </Location>
+               <Location
+                  uuid = "7D0BA89A-B7BF-47B1-937A-E734DA6192B8 - 1a9247a028f35812"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Bonocle.NativeWebSocket.connect() -&gt; ()"
+                  moduleName = "Bonocle"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/isstudent/Downloads/Bonocle-main/Bonocle/Services/WebSocketProvider/NativeWebSocket.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "25"
+                  endingLineNumber = "25"
+                  offsetFromSymbolStart = "116">
+               </Location>
             </Locations>
          </BreakpointContent>
       </BreakpointProxy>
